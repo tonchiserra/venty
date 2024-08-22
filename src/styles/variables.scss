@@ -1,0 +1,21 @@
+//Brand
+$color-primary: #8E9FC9;
+$color-secondary: #40495F;
+$color-tertiary: #DFDED6;
+
+//Font
+$font-body-family: 'Raleway', sans-serif;
+$font-heading-family: 'Raleway', sans-serif;
+$color-text: #222;
+$color-link: #8E9FC9;
+
+//Brakpoints
+$breakpoint-mobile: 749px;
+$content-width: 1200px;
+
+// Media Queries
+@mixin mobile-only {
+    @media (max-width: $breakpoint-mobile) {
+        @content;
+    }
+}

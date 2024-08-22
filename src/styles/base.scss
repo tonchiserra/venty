@@ -1,0 +1,98 @@
+html {
+    box-sizing: border-box;
+    font-family: $font-body-family;
+    font-size: 10px;
+    color: $color-text;
+    scroll-behavior: smooth;
+    font-variant-numeric: lining-nums proportional-nums;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    position: relative;
+    background: #fff;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+main {
+    padding-top: 16px;
+    padding-bottom: 56px;
+}
+
+p {
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 20px;
+    width: max-content;
+}
+
+.text-small {
+    font-size: 1.4rem;
+    line-height: 16px;
+}
+
+h1 {
+    font-family: $font-heading-family;
+    line-height: 1;
+    font-size: 3.2rem;
+    font-weight: 800;
+}
+
+h2 {
+    font-family: $font-heading-family;
+    line-height: 1.2;
+    font-size: 2.8rem;
+    font-weight: 700;
+}
+
+h3 {
+    font-family: $font-heading-family;
+    line-height: 1;
+    font-size: 2.4rem;
+}
+
+h4 {
+    font-family: $font-heading-family;
+    line-height: 1;
+    font-size: 2rem;
+}
+
+h5 {
+    font-family: $font-heading-family;
+    line-height: 1;
+    font-size: 1.6rem;
+}
+
+a {
+    text-decoration: none;
+    color: $color-link;
+    transition: all 300ms ease;
+    font-size: 1.6rem;
+    font-weight: 600;
+    position: relative;
+
+    &:hover {
+        color: $color-secondary;
+    }
+}
+
+.page-width {
+    width: 100%;
+    max-width: $content-width;
+    margin: 0 auto;
+
+    @media screen and (max-width: 1999px) {
+        padding: 0 24px;
+    }
+}
