@@ -8,6 +8,8 @@ import AddView from '@/views/AddView.vue'
 import SearchView from '@/views/SearchView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 
+import '@/stores/EventStore.ts'
+
 const routes = [
     { path: '/', component: FeedView },
     { path: '/location', component: LocationView },

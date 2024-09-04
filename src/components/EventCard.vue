@@ -1,23 +1,23 @@
 <template>
     <div class="event-card">
         <div class="event-card__image">
-            <img :src="event.images[0]" :alt="event.title" loading="lazy" />
+            <img v-if="!!event.images" :src="event.images[0]" :alt="event.title" loading="lazy" />
         </div>
 
         <div class="event-card__info">
             <div class="event-card__info-container">
                 <div class="event-owner">
-                    <img :src="event.company.avatar" :alt="event.company.name" loading="lazy" />
-                    <p class="text-small">{{ event.company.name }}</p>
+                    <!-- <img :src="event.company.avatar" :alt="event.company.name" loading="lazy" /> -->
+                    <!-- <p class="text-small">{{ event.company.name }}</p> -->
                     <!-- <VerifiedIcon v-if="event.company.virified" /> -->
                 </div>
-                <p class="event-date text-small">
+                <p v-if="!!event.date" class="event-date text-small">
                     {{ event.date }}
                 </p>
             </div>
 
             <div class="event-card__info-container">
-                <h2 class="event-title">{{ event.title }}</h2>
+                <h2 v-if="!!event.title" class="event-title">{{ event.title }}</h2>
             </div>
         </div>
     </div>
