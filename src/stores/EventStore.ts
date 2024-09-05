@@ -10,7 +10,7 @@ class EventStore {
         this.getLastEvents()
     }
 
-    async getLastEvents() {
+    async getLastEvents(): Promise<void> {
         try {
             let response = await fetch(config.APP.EVENT_ENDPOINT)
             if(!response.ok) throw new Error(response.statusText)
@@ -22,10 +22,25 @@ class EventStore {
             console.error(error)
         }
     }
+
+    async getEventById(id: string): Promise<void> {
+        try {
+            let response = await fetch(`${config.APP.EVENT_ENDPOINT}/${id}`)
+            if(!response.ok) throw new Error(response.statusText)
+
+            let event = await response.json()
+            this.state.event = event.data
+            console.log(this.state.event)
+
+        }catch(error) {
+            console.error(error)
+        }
+    }
 }
 
 const eventStore = new EventStore({
-    events: []
+    events: [],
+    event: {}
 })
 
 export { eventStore }
