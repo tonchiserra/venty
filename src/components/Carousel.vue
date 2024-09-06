@@ -31,5 +31,36 @@
                 object-fit: cover;
             }
         }
+
+        .flickity-page-dots {
+            bottom: 8px;
+
+            .dot {
+                margin: 0 4px;
+                width: 8px;
+                height: 8px;
+                background: #fff;
+                opacity: .5;
+                transition: all 300ms ease;
+
+                &.is-selected {
+                    opacity: 1;
+                }
+            }
+        }
+
+        .flickity-button {
+            background-color: transparent;
+            width: 36px;
+            height: 36px;
+
+            svg {
+                color: #fff;
+            }
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
     }
 </style>
