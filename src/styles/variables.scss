@@ -1,13 +1,17 @@
 //Brand
-$color-primary: #DA4167;
-$color-secondary: #083D77;
-$color-tertiary: #EBEBD3;
+$color-primary: #53884A;
+$color-secondary: #2F3E46;
+$color-tertiary: #A3C19E;
 
 //Font
 $font-body-family: 'Raleway', sans-serif;
 $font-heading-family: 'Raleway', sans-serif;
 $color-text: #222;
-$color-link: #DA4167;
+$color-text-light: #AAA;
+$color-link: #53884A;
+
+//Colors
+$color-grey: #BBB;
 
 //Brakpoints
 $breakpoint-mobile: 749px;
@@ -16,6 +20,12 @@ $content-width: 1200px;
 // Media Queries
 @mixin mobile-only {
     @media (max-width: $breakpoint-mobile) {
+        @content;
+    }
+}
+
+@mixin mobile-up {
+    @media (min-width: ($breakpoint-mobile + 1)) {
         @content;
     }
 }

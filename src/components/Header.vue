@@ -1,5 +1,5 @@
 <template>
-    <header class="header">
+    <header class="header" :class="{ 'show-in-desktop': showHeader }">
         <div class="header__container page-width">
             <h1>
                 <Logo />
@@ -13,6 +13,11 @@
 <script setup lang="ts">
     import Logo from './Logo.vue'
     import MainNav from './MainNav.vue'
+    import { computed } from 'vue'
+    import { useRoute } from 'vue-router'
+
+    const route = useRoute()
+    const showHeader = computed(() => route.path === '/')
 </script>
 
 <style lang="scss" scoped>
@@ -21,19 +26,17 @@
         border-bottom: 1px solid $color-tertiary;
         height: 64px;
 
+        @include mobile-only {
+            &:not(.show-in-desktop) {
+                display: none;
+            }
+        }
+
         &__container {
             display: flex;
             align-items: center;
             justify-content: space-between;
             height: 100%;
-        }
-
-        .main-menu {
-            position: unset;
-
-            @include mobile-only {
-                display: none;
-            }
         }
     }
 </style>

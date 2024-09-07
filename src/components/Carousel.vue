@@ -13,16 +13,17 @@
 
     onMounted(() => {
         new Flickity( '.carousel', {
-            cellAlign: 'left',
-            contain: true
+            cellAlign: 'center',
+            contain: true,
+            wrapAround: true
         })
     })
 </script>
 
 <style lang="scss">
     .carousel {
+
         &-cell {
-            height: 300px;
             width: 100%;
 
             img {

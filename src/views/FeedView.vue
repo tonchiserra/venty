@@ -1,11 +1,9 @@
 <template>
-    <main>
-        <div class="page-width feed">
-            <template v-for="event in eventStore.state.events">
-                <EventCard :event="event" />
-            </template>
-        </div>
-    </main>
+    <div class="page-width feed">
+        <template v-for="event in eventStore.state.events">
+            <EventCard :event="event" />
+        </template>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -18,5 +16,9 @@
         display: grid;
         grid-template-columns: 1fr;
         gap: 16px;
+
+        @include mobile-up {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
     }
 </style>

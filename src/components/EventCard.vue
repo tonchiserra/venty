@@ -1,8 +1,8 @@
 <template>
     <div class="event-card">
-        <div class="event-card__image">
+        <a :href="`/events/` + event.id" class="event-card__image">
             <img v-if="!!event.images" :src="event.images[0]" :alt="event.title" loading="lazy" />
-        </div>
+        </a>
 
         <div class="event-card__info">
             <div class="event-card__info-container">
@@ -10,15 +10,17 @@
                     <!-- <img :src="event.company.avatar" :alt="event.company.name" loading="lazy" /> -->
                     <!-- <p class="text-small">{{ event.company.name }}</p> -->
                     <!-- <VerifiedIcon v-if="event.company.virified" /> -->
+                    <img src="https://via.placeholder.com/20" alt="Company" loading="lazy" />
+                    <p class="text-small">Company</p>
                 </div>
-                <p v-if="!!event.date" class="event-date text-small">
-                    {{ event.date }}
+                <p v-if="!!event.dates && !!event.dates[0].date" class="event-date text-small">
+                    {{ event.dates[0].date }}
                 </p>
             </div>
 
-            <div class="event-card__info-container">
+            <a :href="`/events/` + event.id" class="event-card__info-container">
                 <h2 v-if="!!event.title" class="event-title">{{ event.title }}</h2>
-            </div>
+            </a>
         </div>
     </div>
 </template>
@@ -34,6 +36,12 @@
         flex-direction: column;
         gap: 8px;
 
+        @include mobile-up {
+            &:only-child {
+                max-width: 400px;
+            }
+        }
+
         &__image {
             width: 100%;
             height: auto;
@@ -41,18 +49,24 @@
             border-radius: 8px;
             overflow: hidden;
 
+            &:hover {
+                img {
+                    transform: scale(1.1);
+                }
+            }
+
             img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
+                transition: all 300ms ease;
             }
         }
 
         &__info {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            padding: 0 4px;
+            padding: 0 2px;
 
             &-container {
                 display: flex;
@@ -64,7 +78,7 @@
             .event-owner {
                 display: flex;
                 align-items: center;
-                gap: 4px;
+                gap: 8px;
 
                 img {
                     border-radius: 100px;
@@ -78,7 +92,7 @@
             }
 
             .event-date {
-                color: $color-tertiary;
+                color: $color-text-light;
                 display: flex;
                 align-items: center;
             }

@@ -1,15 +1,20 @@
 <template>
-    <Header v-if="showHeader" />
+    <Header />
     <MainNav />
-    <RouterView />
+    <main>
+        <RouterView />
+    </main>
+    <Footer />
 </template>
 
 <script setup lang="ts">
-    import Header from "@/components/Header.vue";
+    import Header from "@/components/Header.vue"
     import MainNav from "@/components/MainNav.vue"
-    import { computed } from 'vue'
-    import { useRoute } from 'vue-router'
-
-    const route = useRoute()
-    const showHeader = computed(() => route.path === '/')
+    import Footer from "@/components/Footer.vue"
 </script>
+
+<style lang="scss">
+    #app {
+        min-height: 80dvh;
+    }
+</style>

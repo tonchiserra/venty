@@ -1,7 +1,7 @@
 <template>
     <button v-if="!!!type || type === 'button'" :class="`button--${level}`"><span>{{ label }}</span></button>
     
-    <a v-if="type === 'anchor'" :href="href" :class="`button button--${level}`"><span>{{ label }}</span></a>
+    <a v-if="type === 'anchor'" :href="href" :class="`button button--${level}`" target="_blank"><span>{{ label }}</span></a>
     
     <label v-if="type === 'label'" :class="`button button--${level}`"><span>{{ label }}</span></label>
 </template>

@@ -26,11 +26,6 @@ body {
     }
 }
 
-main {
-    padding-top: 16px;
-    padding-bottom: 56px;
-}
-
 p {
     font-weight: 500;
     font-size: 1.6rem;
@@ -91,14 +86,12 @@ h5 {
 
 a {
     text-decoration: none;
-    color: $color-link;
+    color: currentColor;
     transition: all 300ms ease;
     font-size: 1.6rem;
-    font-weight: 600;
-    position: relative;
 
     &:hover {
-        color: $color-secondary;
+        color: $color-link;
     }
 }
 

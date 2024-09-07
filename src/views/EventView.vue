@@ -1,13 +1,14 @@
 <template>
-    <div class="event" v-if="!!eventStore.state.event.id">
+    <div class="event page-width" v-if="!!eventStore.state.event.id">
         <div class="event-gallery" v-if="!!eventStore.state.event.images.length">
             <Carousel :images="eventStore.state.event.images" />
         </div>
 
         <div class="event-info">
             <div class="event-caption">
-                <!-- <p v-if="!!eventStore.state.event.company && !!eventStore.state.event.company.name">{{ eventStore.state.event.company.name }} - </p> -->
-                <p v-if="!!eventStore.state.event.dates[0] && !!eventStore.state.event.dates[0].date" class="text-small text-bold">{{ eventStore.state.event.dates[0].date }}</p>
+                <!-- <p v-if="!!eventStore.state.event.company && !!eventStore.state.event.company.name" class="text-small">{{ eventStore.state.event.company.name }} - </p> -->
+                <p class="text-small">Company</p> 
+                <p v-if="!!eventStore.state.event.dates[0] && !!eventStore.state.event.dates[0].date" class="text-small">- {{ eventStore.state.event.dates[0].date }}</p>
             </div>
 
             <h2 class="event-title">{{ eventStore.state.event.title }}</h2>
@@ -37,7 +38,7 @@
 
             <div class="event-location" v-if="!!eventStore.state.event.location">
                 <IconLocation />
-                <p class="location">{{ eventStore.state.event.location }}</p>
+                <a :href="`https://www.google.com/maps/search/` + eventStore.state.event.location.replaceAll(' ', '+')" target="_blank" class="location">{{ eventStore.state.event.location }}</a>
             </div>
 
             <CustomButton v-if="!!eventStore.state.event.cta" 
@@ -45,7 +46,6 @@
                 level="primary" 
                 label="Reservar ahora"
                 type="anchor"
-                class="button button--primary" 
             />
 
             <div class="event-description">
@@ -53,6 +53,7 @@
             </div>
         </div>
     </div>
+    <LoadingSpinner v-else />
 </template>
 
 <script setup lang="ts">
@@ -61,6 +62,7 @@
     import Carousel from '@/components/Carousel.vue'
     import IconLocation from '@/assets/IconLocation.vue'
     import CustomButton from '@/components/CustomButton.vue'
+    import LoadingSpinner from '@/components/LoadingSpinner.vue'
 
     const route = useRoute()
     eventStore.getEventById(route.params.id as string)

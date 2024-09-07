@@ -1,7 +1,5 @@
 <template>
-    <main>
-        <div class="page-width">
-            Location
-        </div>
-    </main>
+    <div class="page-width">
+        Location
+    </div>
 </template>
