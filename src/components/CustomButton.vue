@@ -1,5 +1,5 @@
 <template>
-    <button v-if="!!!type || type === 'button'" :class="`button--${level}`"><span>{{ label }}</span></button>
+    <button v-if="!!!type || type === 'button' || type === 'reset' || type === 'submit'" :type="type" :class="`button--${level}`"><span>{{ label }}</span></button>
     
     <a v-if="type === 'anchor'" :href="href" :class="`button button--${level}`" target="_blank"><span>{{ label }}</span></a>
     
@@ -10,12 +10,12 @@
     defineProps<{
         level: 'primary' | 'secondary'
         label: string
-        type: 'button' | 'anchor' | 'label'
+        type: 'button' | 'submit' | 'reset' | 'anchor' | 'label'
         href?: string
     }>()
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     button,
     .button {
         padding: 0 20px;
@@ -28,6 +28,7 @@
         font-size: 1.6rem;
         transition: all 300ms ease;
         cursor: pointer;
+        position: relative;
 
         &:hover,
         &:focus,
@@ -41,7 +42,6 @@
             background-color: $color-primary;
             color: #fff;
             font-weight: 700;
-            position: relative;
             overflow: hidden;
 
             &::after {
@@ -72,12 +72,27 @@
         &.button--secondary {
             background-color: transparent;
             color: $color-primary;
-            text-decoration: underline;
-            text-underline-offset: 4px;
-            font-weight: 600;
+            font-weight: 500;
+
+            span{
+                position: relative;
+            
+                &::after {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: 0px;
+                    height: 1px;
+                    width: 0px;
+                    transition: all 300ms ease;
+                    background-color: $color-primary;
+                }
+            }
 
             &:hover {
-                color: $color-secondary;
+                span::after {
+                    width: 100%;
+                }
             }
         }
     }

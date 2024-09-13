@@ -14,7 +14,7 @@
                 </RouterLink>
             </li>
             <li>
-                <RouterLink to="/add">
+                <RouterLink to="/new">
                     <IconNew />
                     <span class="label">Añadir</span>
                 </RouterLink>

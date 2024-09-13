@@ -36,6 +36,13 @@ class EventStore {
             console.error(error)
         }
     }
+
+    async addEvent(evt: Event): Promise<void> {
+        if(!!!evt.target) return 
+
+        let data = Object.fromEntries(new FormData(evt.target as HTMLFormElement))
+        console.log(data)
+    }
 }
 
 const eventStore = new EventStore({

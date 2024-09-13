@@ -14,7 +14,7 @@ import '@/stores/EventStore.ts'
 const routes = [
     { path: '/', component: FeedView },
     { path: '/location', component: LocationView },
-    { path: '/add', component: AddView },
+    { path: '/new', component: AddView },
     { path: '/search', component: SearchView },
     { path: '/events/:id', component: EventView} ,
     { path: '/:pathMatch(.*)*', component: NotFoundView },
