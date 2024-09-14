@@ -25,7 +25,7 @@
                         :class="{
                             'success': date.availableTickets >= (date.totalTickets * 0.50),
                             'warning': date.availableTickets < (date.totalTickets * 0.50) && date.availableTickets > 0,
-                            'critical': date.availableTickets <= 0
+                            'critical': date.availableTickets <= 0 || !!!date.availableTickets
                         }"
                     >
                         {{ date.startsAt }} -

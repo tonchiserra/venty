@@ -78,5 +78,86 @@ form {
         left: 16px;
         font-size: 1.4rem;
         transition: all 300ms ease;
+        pointer-events: none;
+    }
+}
+
+.image-field-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 8px;
+
+    label {
+        cursor: pointer;
+        height: 100%;
+        padding: 0;
+        overflow: hidden;
+
+        &:first-of-type {
+            grid-column: span 3;
+            grid-row: span 3;
+
+            .image-label {
+                svg {
+                    width: 64px;
+                    height: 64px;
+                }
+    
+                span {
+                    font-size: 1.6rem;
+                }
+            }
+        }
+
+        &:hover .image-label {
+            color: $color-primary;
+        }
+
+        .image-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: $color-grey;
+            height: 100%;
+            transition: all 300ms ease;
+            padding: 16px 8px;
+
+            svg {
+                width: 32px;
+                height: 32px;
+            }
+
+            span {
+                font-size: 1.2rem;
+                text-align: center;
+            }
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        &:hover .delete-img {
+            opacity: 1;
+        }
+
+        .delete-img {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            color: $color-grey;
+            padding: 4px;
+            background-color: transparent;
+            transition: all 300ms ease;
+            opacity: 0;
+
+            &:hover {
+                color: #000;
+            }
+        }
     }
 }

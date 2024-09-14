@@ -125,3 +125,16 @@ a {
 .critical {
     color: red;
 }
+
+button {
+    border: none;
+    cursor: pointer;
+    
+    &:hover,
+    &:focus,
+    &:active,
+    &:focus-within{
+        outline: none;
+        border: none;
+    }
+}

@@ -30,18 +30,30 @@ class EventStore {
 
             let event = await response.json()
             this.state.event = event.data
-            console.log(this.state.event)
 
         }catch(error) {
             console.error(error)
         }
     }
 
-    async addEvent(evt: Event): Promise<void> {
-        if(!!!evt.target) return 
+    async addEvent(event: any): Promise<void> {
 
-        let data = Object.fromEntries(new FormData(evt.target as HTMLFormElement))
-        console.log(data)
+        console.log(event)
+
+        // try {
+        //     let response = await fetch(config.APP.EVENT_ENDPOINT, {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify(event)
+        //     })
+
+        //     await response.json()
+
+        // }catch(error) {
+        //     console.error(error)
+        // }
     }
 }
 
