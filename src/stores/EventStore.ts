@@ -40,20 +40,20 @@ class EventStore {
 
         console.log(event)
 
-        // try {
-        //     let response = await fetch(config.APP.EVENT_ENDPOINT, {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify(event)
-        //     })
+        try {
+            let response = await fetch(config.APP.EVENT_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(event)
+            })
 
-        //     await response.json()
+            await response.json()
 
-        // }catch(error) {
-        //     console.error(error)
-        // }
+        }catch(error) {
+            console.error(error)
+        }
     }
 }
 

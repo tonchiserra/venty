@@ -1,7 +1,7 @@
 <template>
     <footer class="footer page-width">
         <Logo />
-        <p class="text-small">&copy; 2024 Venty</p>
+        <p class="text-small">&copy; 2024 Venty - Designed and developed by <a href="https://linkedin.com/in/serragonzalo" target="_blank">Gonzalo Serra</a></p>
     </footer>
 </template>
 
