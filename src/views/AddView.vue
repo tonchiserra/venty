@@ -2,7 +2,7 @@
     <div class="add page-width">
         <h2 class="title h1">Nuevo evento</h2>
 
-        <form class="add-form" @submit.prevent="eventStore.addEvent(formData)">
+        <form class="add-form" @submit.prevent="submitForm">
             <div class="field">
                 <input type="text" name="title" placeholder="Titulo" v-model="formData.title" required />
                 <label for="EventTitle">Título *</label>
@@ -117,7 +117,7 @@
             { image: null, imageURL: null },
             { image: null, imageURL: null }
         ],
-        dates: [{}, {}, {}, {}, {}]
+        dates: [{}, {}, {}, {}, {}],
     })
 
     const changeImage = (event: Event, i: number) => {
@@ -132,6 +132,29 @@
         formData.value.images[i-1].image = null
         formData.value.images[i-1].imageURL = null
     }
+
+    const createImagesFormData = (): FormData => {
+        const imagesFormData = new FormData()
+
+        formData.value.images.forEach((image: any, index: number) => {
+            if(!!image.image) {
+                imagesFormData.append(`image[${index}]`, image.image)
+            }
+        })
+
+        return imagesFormData
+    }
+
+    const submitForm = async () => {
+        const imagesFormData = createImagesFormData()
+        const imageURLs: string[] = await eventStore.uploadImages(imagesFormData)
+
+        imageURLs.forEach((url: string, i: number) => {
+            formData.value.images[i].image = url
+        })
+
+        await eventStore.addEvent(formData.value)
+    }
 </script>
 
 <style scoped lang="scss">
@@ -142,6 +165,7 @@
         width: 100%;
         max-width: 600px;
         margin: 24px auto 0;
+        min-height: calc(100dvh - $header-height);
 
         .title {
             text-align: center;

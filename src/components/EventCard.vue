@@ -11,7 +11,7 @@
                     <!-- <p class="text-small">{{ event.company.name }}</p> -->
                     <!-- <VerifiedIcon v-if="event.company.virified" /> -->
                     <img src="https://via.placeholder.com/20" alt="Company" loading="lazy" />
-                    <p class="text-small">Company</p>
+                    <p class="text-small">Autogenerado</p>
                 </div>
                 <p v-if="!!event.dates && !!event.dates[0].date" class="event-date text-small">
                     {{ event.dates[0].date }}

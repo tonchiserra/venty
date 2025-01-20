@@ -17,6 +17,8 @@ $color-grey: #BBB;
 $breakpoint-mobile: 749px;
 $content-width: 1200px;
 
+$header-height: 64px;
+
 // Media Queries
 @mixin mobile-only {
     @media (max-width: $breakpoint-mobile) {

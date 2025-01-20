@@ -7,7 +7,7 @@
         <div class="event-info">
             <div class="event-caption">
                 <!-- <p v-if="!!eventStore.state.event.company && !!eventStore.state.event.company.name" class="text-small">{{ eventStore.state.event.company.name }} - </p> -->
-                <p class="text-small">Company</p> 
+                <p class="text-small">Autogenerado</p> 
                 <p v-if="!!eventStore.state.event.dates[0] && !!eventStore.state.event.dates[0].date" class="text-small">- {{ eventStore.state.event.dates[0].date }}</p>
             </div>
 

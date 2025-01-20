@@ -1,4 +1,6 @@
 .event {
+    min-height: calc(100dvh - $header-height);
+
     @include mobile-only {
         &.page-width {
             padding: 0;

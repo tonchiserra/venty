@@ -24,7 +24,7 @@
     .header {
         background-color: #fff;
         border-bottom: 1px solid $color-tertiary;
-        height: 64px;
+        height: $header-height;
 
         @include mobile-only {
             &:not(.show-in-desktop) {

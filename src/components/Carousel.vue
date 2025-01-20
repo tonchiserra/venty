@@ -25,6 +25,7 @@
 
         &-cell {
             width: 100%;
+            aspect-ratio: 4/3;
 
             img {
                 width: 100%;

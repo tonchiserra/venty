@@ -38,13 +38,12 @@ class EventStore {
 
     async addEvent(event: any): Promise<void> {
 
-        console.log(event)
-
         try {
             let response = await fetch(config.APP.EVENT_ENDPOINT, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'enctype': 'multipart/form-data'
                 },
                 body: JSON.stringify(event)
             })
@@ -54,6 +53,26 @@ class EventStore {
         }catch(error) {
             console.error(error)
         }
+    }
+
+    async uploadImages(formData: FormData): Promise<string[]> {
+        let imagesURLs
+
+        try {
+            let response = await fetch(config.APP.IMAGES_ENDPOINT, {
+                method: 'POST',
+                body: formData
+            })
+
+            imagesURLs = await response.json()
+            
+            if(!!!response.ok) throw imagesURLs
+
+        }catch(error) {
+            console.error(error)
+        }
+
+        return imagesURLs.data
     }
 }
 

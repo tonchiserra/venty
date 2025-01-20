@@ -16,6 +16,8 @@
         display: grid;
         grid-template-columns: 1fr;
         gap: 16px;
+        padding-top: 16px;
+        min-height: calc(100dvh - $header-height);
 
         @include mobile-up {
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

@@ -14,6 +14,7 @@
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
+        gap: 20px;
         padding-top: 60px;
         padding-bottom: 40px;
 
