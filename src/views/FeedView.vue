@@ -15,7 +15,7 @@
     .feed {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 32px;
         padding-top: 16px;
         min-height: calc(100dvh - $header-height);
 

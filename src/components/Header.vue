@@ -2,8 +2,10 @@
     <header class="header" :class="{ 'show-in-desktop': showHeader }">
         <div class="header__container page-width">
             <h1>
-                <Logo />
-                <span class="hidden">Venty</span>
+                <a href="/">
+                    <Logo />
+                    <span class="hidden">Venty</span>
+                </a>
             </h1>
             <MainNav />
         </div>
@@ -17,7 +19,7 @@
     import { useRoute } from 'vue-router'
 
     const route = useRoute()
-    const showHeader = computed(() => route.path === '/')
+    const showHeader = computed(() => route.path === '/' || route.path === '/events')
 </script>
 
 <style lang="scss" scoped>

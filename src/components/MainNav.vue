@@ -25,6 +25,12 @@
                     <span class="label">Buscar</span>
                 </RouterLink>
             </li>
+            <li>
+                <RouterLink to="/profile">
+                    <img v-if="!!user.picture" :src="user.picture" class="profile-picture" />
+                    <IconProfile v-else />
+                </RouterLink>
+            </li>
         </ul>
     </nav>
 </template>
@@ -34,6 +40,10 @@
     import IconLocation from '@/assets/IconLocation.vue'
     import IconNew from '@/assets/IconNew.vue'
     import IconSearch from '@/assets/IconSearch.vue'
+    import IconProfile from '@/assets/IconProfile.vue'
+    import { useAuth0 } from '@auth0/auth0-vue'
+
+    const { user } = useAuth0()
 </script>
 
 <style lang="scss" scoped>
@@ -72,6 +82,13 @@
                 width: 28px;
                 height: auto;
             }
+        }
+
+        .profile-picture {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid $color-grey;
         }
     }
 

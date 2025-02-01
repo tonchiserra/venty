@@ -94,18 +94,36 @@
             </div>
 
         </form>
+
+        <LoadingSpinner v-if="showLoader" :fixed="true" />
+
+        <ErrorPopup v-if="showError" :message="errorMessage" />
     </div>
 </template>
 
 <script setup lang="ts">
     import CustomButton from '@/components/CustomButton.vue'
+    import ErrorPopup from '@/components/ErrorPopup.vue'
+    import LoadingSpinner from '@/components/LoadingSpinner.vue'
     import { eventStore } from '@/stores/EventStore'
     import { ref } from 'vue'
     import IconPlus from '@/assets/IconPlus.vue'
+    import { useAuth0 } from "@auth0/auth0-vue"
+
+    const { user } = useAuth0()
 
     const datesQuantity = ref(1)
 
+    let showError = ref<boolean>(false)
+    let errorMessage = ref<string>('')
+
+    let showLoader = ref<boolean>(false)
+
     const formData = ref<any>({
+        owner: {
+            name: user.value.nickname ?? user.value.name ?? 'Autogenerado',
+            picture: user.value.picture ?? 'https://firebasestorage.googleapis.com/v0/b/venty-be439.appspot.com/o/venty.png?alt=media&token=73319d64-32aa-4995-873a-61182e8cfa13'
+        },
         title: '',
         description: '',
         cta: '',
@@ -146,14 +164,27 @@
     }
 
     const submitForm = async () => {
-        const imagesFormData = createImagesFormData()
-        const imageURLs: string[] = await eventStore.uploadImages(imagesFormData)
+        try {
+            showLoader.value = true
+            showError.value = false
+            const imagesFormData = createImagesFormData()
+            const imageURLs: string[] = await eventStore.uploadImages(imagesFormData)
 
-        imageURLs.forEach((url: string, i: number) => {
-            formData.value.images[i].image = url
-        })
+            imageURLs.forEach((url: string, i: number) => {
+                formData.value.images[i].image = url
+            })
 
-        await eventStore.addEvent(formData.value)
+            await eventStore.addEvent(formData.value)
+
+            showLoader.value = false
+            location.href = '/'
+
+        }catch(error) {
+            console.error(error)
+            showError.value = true
+            errorMessage.value = 'Ocurrió un error al crear el evento. Intentelo de nuevo más tarde.'
+            showLoader.value = false
+        }
     }
 </script>
 

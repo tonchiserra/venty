@@ -6,8 +6,8 @@
 
         <div class="event-info">
             <div class="event-caption">
-                <!-- <p v-if="!!eventStore.state.event.company && !!eventStore.state.event.company.name" class="text-small">{{ eventStore.state.event.company.name }} - </p> -->
-                <p class="text-small">Autogenerado</p> 
+                <img :src="eventStore.state.event.owner?.picture ?? ''" alt="Company" loading="lazy" />
+                <p class="text-small">{{ eventStore.state.event.owner?.name ?? 'Autogenerado' }}</p> 
                 <p v-if="!!eventStore.state.event.dates[0] && !!eventStore.state.event.dates[0].date" class="text-small">- {{ eventStore.state.event.dates[0].date }}</p>
             </div>
 
@@ -42,10 +42,11 @@
             </div>
 
             <CustomButton v-if="!!eventStore.state.event.cta" 
+                type="anchor"
                 :href="eventStore.state.event.cta" 
+                target="_blank"
                 level="primary" 
                 label="Reservar ahora"
-                type="anchor"
             />
 
             <div class="event-description">
