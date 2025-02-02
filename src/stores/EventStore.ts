@@ -1,6 +1,7 @@
 import { config } from "@/config/config"
 import { reactive } from "vue"
 import { IEventStoreState } from "@/interfaces/EventInterface"
+import { Auth0VueClient } from "@auth0/auth0-vue"
 
 class EventStore {
     public state: IEventStoreState
@@ -11,7 +12,7 @@ class EventStore {
     }
 
     async getLastEvents(): Promise<void> {
-        try {
+        try {            
             let response = await fetch(config.APP.EVENT_ENDPOINT)
             if(!response.ok) throw new Error(response.statusText)
 
@@ -36,14 +37,17 @@ class EventStore {
         }
     }
 
-    async addEvent(event: any): Promise<void> {
+    async addEvent(event: any, auth0: Auth0VueClient): Promise<void> {
 
         try {
+            const token = await auth0.getAccessTokenSilently()
+
             let response = await fetch(config.APP.EVENT_ENDPOINT, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'enctype': 'multipart/form-data'
+                    'enctype': 'multipart/form-data',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(event)
             })
@@ -55,13 +59,18 @@ class EventStore {
         }
     }
 
-    async uploadImages(formData: FormData): Promise<string[]> {
+    async uploadImages(formData: FormData, auth0: Auth0VueClient): Promise<string[]> {
         let imagesURLs
 
         try {
+            const token = await auth0.getAccessTokenSilently()
+
             let response = await fetch(config.APP.IMAGES_ENDPOINT, {
                 method: 'POST',
-                body: formData
+                body: formData,
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             })
 
             imagesURLs = await response.json()

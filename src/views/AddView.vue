@@ -110,7 +110,8 @@
     import IconPlus from '@/assets/IconPlus.vue'
     import { useAuth0 } from "@auth0/auth0-vue"
 
-    const { user } = useAuth0()
+    const auth0 = useAuth0()
+    const user = auth0.user
 
     const datesQuantity = ref(1)
 
@@ -168,13 +169,13 @@
             showLoader.value = true
             showError.value = false
             const imagesFormData = createImagesFormData()
-            const imageURLs: string[] = await eventStore.uploadImages(imagesFormData)
+            const imageURLs: string[] = await eventStore.uploadImages(imagesFormData, auth0)
 
             imageURLs.forEach((url: string, i: number) => {
                 formData.value.images[i].image = url
             })
 
-            await eventStore.addEvent(formData.value)
+            await eventStore.addEvent(formData.value, auth0)
 
             showLoader.value = false
             location.href = '/'

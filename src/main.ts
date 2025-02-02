@@ -35,7 +35,9 @@ app.use(createAuth0({
     domain: "venty.us.auth0.com",
     clientId: "oJT9CerolVW1QuXxYvisipz3tpR6bCLY",
     authorizationParams: {
-        redirect_uri: window.location.origin
+        redirect_uri: window.location.origin,
+        audience: "https://venty.us.auth0.com/api/v2/",
+        scope: "openid profile email"
     }
 }))
 

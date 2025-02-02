@@ -1,5 +1,5 @@
 <template>
-    <button v-if="!!!type || type === 'button' || type === 'reset' || type === 'submit'" :type="type" :class="`button--${level}`"><span>{{ label }}</span></button>
+    <button v-if="!!!type || type === 'button' || type === 'reset' || type === 'submit'" :type="type" :class="`button--${level}`" @click="click"><span>{{ label }}</span></button>
     
     <a v-if="type === 'anchor'" :href="href" :class="`button button--${level}`" :target="target"><span>{{ label }}</span></a>
     
@@ -13,6 +13,7 @@
         type: 'button' | 'submit' | 'reset' | 'anchor' | 'label'
         href?: string
         target?: string
+        click?: () => void
     }>()
 </script>
 

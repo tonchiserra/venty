@@ -1,7 +1,7 @@
 <template>
     <nav class="main-menu">
         <ul>
-            <li>
+            <li v-if="!!isAuthenticated">
                 <RouterLink to="/location">
                     <IconLocation />
                     <span class="label">Ubicación</span>
@@ -13,7 +13,7 @@
                     <span class="label">Inicio</span>
                 </RouterLink>
             </li>
-            <li>
+            <li v-if="!!isAuthenticated">
                 <RouterLink to="/new">
                     <IconNew />
                     <span class="label">Añadir</span>
@@ -27,7 +27,7 @@
             </li>
             <li>
                 <RouterLink to="/profile">
-                    <img v-if="!!user.picture" :src="user.picture" class="profile-picture" />
+                    <img v-if="!!isAuthenticated && !!user.picture" :src="user.picture" class="profile-picture" />
                     <IconProfile v-else />
                 </RouterLink>
             </li>
@@ -43,7 +43,7 @@
     import IconProfile from '@/assets/IconProfile.vue'
     import { useAuth0 } from '@auth0/auth0-vue'
 
-    const { user } = useAuth0()
+    const { user, isAuthenticated } = useAuth0()
 </script>
 
 <style lang="scss" scoped>
