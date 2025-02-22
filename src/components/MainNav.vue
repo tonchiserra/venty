@@ -19,15 +19,15 @@
                     <span class="label">Añadir</span>
                 </RouterLink>
             </li>
-            <li>
+            <!-- <li>
                 <RouterLink to="/search">
                     <IconSearch />
                     <span class="label">Buscar</span>
                 </RouterLink>
-            </li>
+            </li> -->
             <li>
                 <RouterLink to="/profile">
-                    <img v-if="!!isAuthenticated && !!user.picture" :src="user.picture" class="profile-picture" />
+                    <img v-if="!!isAuthenticated && !!user && !!user.picture" :src="user.picture" class="profile-picture" />
                     <IconProfile v-else />
                 </RouterLink>
             </li>
@@ -81,6 +81,8 @@
             svg {
                 width: 28px;
                 height: auto;
+                transition: all 300ms ease;
+                filter: brightness(1);
             }
         }
 
@@ -89,6 +91,12 @@
             height: 28px;
             border-radius: 50%;
             border: 1px solid $color-grey;
+        }
+
+        .router-link-active {
+            svg {
+                filter: brightness(0.7);
+            }
         }
     }
 

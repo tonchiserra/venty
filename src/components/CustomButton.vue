@@ -42,6 +42,7 @@
 
         &.button--primary {
             background-color: $color-primary;
+            border: 1px solid $color-primary;
             color: #fff;
             font-weight: 700;
             overflow: hidden;
@@ -73,6 +74,7 @@
 
         &.button--secondary {
             background-color: transparent;
+            border: 1px solid $color-primary;
             color: $color-primary;
             font-weight: 500;
 

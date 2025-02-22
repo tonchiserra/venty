@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@auth0/auth0-vue": "^2.4.0",
+    "@vue-leaflet/vue-leaflet": "^0.10.1",
+    "leaflet": "^1.9.4",
     "vue": "^3.4.37",
     "vue-router": "^4.4.3"
   },

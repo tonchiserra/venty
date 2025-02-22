@@ -11,7 +11,6 @@
     import Header from "@/components/Header.vue"
     import MainNav from "@/components/MainNav.vue"
     import Footer from "@/components/Footer.vue"
-    import LoadingSpinner from "@/components/LoadingSpinner.vue"
 </script>
 
 <style lang="scss">
