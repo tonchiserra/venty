@@ -1,13 +1,13 @@
 form {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 8px;
 }
 
 .field-group {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-    gap: 16px;
+    gap: 8px;
 }
 
 .field {

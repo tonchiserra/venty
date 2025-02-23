@@ -12,6 +12,7 @@ import NotFoundView from '@/views/NotFoundView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 
 import '@/stores/EventStore.ts'
+import '@/stores/LocationStore.ts'
 
 const routes = [
     { path: '/', component: FeedView },

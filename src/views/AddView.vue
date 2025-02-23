@@ -193,14 +193,14 @@
     .add {
         display: flex;
         flex-direction: column;
-        gap: 32px;
+        gap: 16px;
         width: 100%;
         max-width: 600px;
         margin: 24px auto 0;
         min-height: calc(100dvh - $header-height);
 
         .title {
-            text-align: center;
+            text-align: left;
         }
 
         .link-button {
