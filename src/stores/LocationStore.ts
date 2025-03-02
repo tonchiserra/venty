@@ -1,4 +1,5 @@
 import L from 'leaflet'
+import { formatMoney } from '@/misc/Helpers'
 
 class LocationStore {
     public map: L.Map | undefined
@@ -37,6 +38,13 @@ class LocationStore {
 
         this.map?.setView([pos.coords.latitude, pos.coords.longitude], 15)
         L.marker([pos.coords.latitude, pos.coords.longitude], { icon: this.userMarker }).addTo(this.map)
+
+        L.circle([pos.coords.latitude, pos.coords.longitude], {
+            color: '#A3C19E',
+            fillColor: '#A3C19E',
+            fillOpacity: 0.1,
+            radius: 27500
+        }).addTo(this.map)
     }
 
     setEventsPositions(events: any) {
@@ -60,15 +68,24 @@ class LocationStore {
     }
 
     createEventPopup(event: any): string {
-        let html = `
-            <div>
-                <h5>${event.title}</h5>
-                <p>${event.dates[0].date} - ${event.dates[0].startsAt}</p>
-                <p>${event.description}</p>
+        let datesHTML = event.dates.reduce((acc: string, date: any) => {
+            return acc + `<p class="text-small">${date.date} - ${date.startsAt}</p>`
+        }, '')
+
+        let price = event.dates.sort((a: any, b: any) => a.price - b.price)[0].price
+        let priceHTML = !!price ? `<p class="text-small">Desde ${formatMoney(price)}</p>` : ''
+
+        let popupHTML = `
+            <div class="marker-popup__content">
+                <a href="/events/${ event.id }"><h5>${event.title}</h5></a>
+                ${ datesHTML }
+                ${ priceHTML }
+                <p class="text-small marker-popup__description">${event.description} sjsk jsksj ksjk jskjs kjskjsk jksj ksjksj kjsk jsksj kjsk jskjs ksj kjs kjsk jsk ks jks jk</p>
+                <a href="/events/${ event.id }" class="view-all-btn">Ver más</a>
             </div>
         `
         
-        return html
+        return popupHTML
     }
 }
 

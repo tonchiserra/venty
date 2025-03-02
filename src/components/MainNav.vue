@@ -1,7 +1,7 @@
 <template>
     <nav class="main-menu">
         <ul>
-            <li v-if="!!isAuthenticated">
+            <li>
                 <RouterLink to="/location">
                     <IconLocation />
                     <span class="label">Ubicación</span>
@@ -28,7 +28,10 @@
             <li>
                 <RouterLink to="/profile">
                     <img v-if="!!isAuthenticated && !!user && !!user.picture" :src="user.picture" class="profile-picture" />
-                    <IconProfile v-else />
+                    <template v-else>
+                        <IconProfile />
+                        <span class="label">Iniciar sesión</span>
+                    </template>
                 </RouterLink>
             </li>
         </ul>
@@ -82,7 +85,6 @@
                 width: 28px;
                 height: auto;
                 transition: all 300ms ease;
-                filter: brightness(1);
             }
         }
 
@@ -91,12 +93,6 @@
             height: 28px;
             border-radius: 50%;
             border: 1px solid $color-grey;
-        }
-
-        .router-link-active {
-            svg {
-                filter: brightness(0.7);
-            }
         }
     }
 

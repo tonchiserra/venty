@@ -34,6 +34,10 @@
                         <span v-else>Sin lugares disponibles</span>
                     </span>
                 </div>
+
+                <span class="event-pricing">
+                    Desde {{ formatMoney(eventStore.state.event.dates.sort((a: any, b: any) => a.price - b.price)[0].price) }}
+                </span>
             </div>
 
             <div class="event-location" v-if="!!eventStore.state.event.location">
@@ -64,6 +68,7 @@
     import IconLocation from '@/assets/IconLocation.vue'
     import CustomButton from '@/components/CustomButton.vue'
     import LoadingSpinner from '@/components/LoadingSpinner.vue'
+    import { formatMoney } from '@/misc/Helpers'
 
     const route = useRoute()
     eventStore.getEventById(route.params.id as string)

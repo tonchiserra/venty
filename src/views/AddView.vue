@@ -39,8 +39,8 @@
             </div>
 
             <div class="field">
-                <input type="text" name="location" placeholder="Location" v-model="formData.location" @input="getLocations" />
-                <label for="EventLocation">Ubicación</label>
+                <input type="text" name="location" placeholder="Location" v-model="formData.location" @input="getLocations" required />
+                <label for="EventLocation">Ubicación *</label>
                 <div class="location-autocomplete-options">
                     <div v-for="option in locationsResult" @click="selectLocationOption(option)">{{ option.display_name }}</div>
                 </div>

@@ -74,7 +74,6 @@
 
         &.button--secondary {
             background-color: transparent;
-            border: 1px solid $color-primary;
             color: $color-primary;
             font-weight: 500;
 

@@ -19,7 +19,7 @@
     import { useRoute } from 'vue-router'
 
     const route = useRoute()
-    const showHeader = computed(() => route.path === '/' || route.path === '/events')
+    const showHeader = computed(() => route.path === '/' || route.path === '/events' || route.path === '/profile')
 </script>
 
 <style lang="scss" scoped>

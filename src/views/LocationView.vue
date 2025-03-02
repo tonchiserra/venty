@@ -51,16 +51,47 @@
         .leaflet-control-attribution {
             display: none;
         }
+
+        .marker-popup__content {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            gap: 4px;
+            width: 200px;
+
+            * {
+                margin: 0;
+                text-wrap: wrap;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 3;
+                width: 100%;
+                overflow: hidden;
+            }
+
+            h5 {
+                margin-bottom: 12px;
+            }
+
+            a {
+                color: $color-primary;
+                text-decoration: none;
+            }
+
+            .view-all-btn {
+                margin-top: 12px;
+            }
+
+            .marker-popup__description {
+                margin-top: 12px;
+            }
+        }
     }
 
     @keyframes pulse {
         0% {
             outline-offset: 0px;
             -moz-outline-radius: 100px;
-            outline-color: $color-primary;
-        }
-        50% {
-            outline-offset: 3px;
             outline-color: $color-primary;
         }
         100% {
