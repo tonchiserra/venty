@@ -127,8 +127,8 @@
 
     const formData = ref<any>({
         owner: {
-            name: user.value.nickname ?? user.value.name ?? 'Autogenerado',
-            picture: user.value.picture ?? 'eventMarker.png'
+            name: user.value?.nickname ?? user.value?.name ?? 'Autogenerado',
+            picture: user.value?.picture ?? 'eventMarker.png'
         },
         title: '',
         description: '',

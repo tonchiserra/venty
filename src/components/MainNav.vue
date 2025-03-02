@@ -42,7 +42,7 @@
     import IconFeed from '@/assets/IconFeed.vue'
     import IconLocation from '@/assets/IconLocation.vue'
     import IconNew from '@/assets/IconNew.vue'
-    import IconSearch from '@/assets/IconSearch.vue'
+    // import IconSearch from '@/assets/IconSearch.vue'
     import IconProfile from '@/assets/IconProfile.vue'
     import { useAuth0 } from '@auth0/auth0-vue'
 
