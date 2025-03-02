@@ -39,8 +39,11 @@
             </div>
 
             <div class="field">
-                <input type="text" name="location" v-model="formData.location" placeholder="Location" />
+                <input type="text" name="location" placeholder="Location" v-model="formData.location" @input="getLocations" />
                 <label for="EventLocation">Ubicación</label>
+                <div class="location-autocomplete-options">
+                    <div v-for="option in locationsResult" @click="selectLocationOption(option)">{{ option.display_name }}</div>
+                </div>
             </div>
 
             <template v-for="i in datesQuantity">
@@ -120,15 +123,18 @@
 
     let showLoader = ref<boolean>(false)
 
+    let locationsResult = ref<any[]>([])
+
     const formData = ref<any>({
         owner: {
             name: user.value.nickname ?? user.value.name ?? 'Autogenerado',
-            picture: user.value.picture ?? 'https://firebasestorage.googleapis.com/v0/b/venty-be439.appspot.com/o/venty.png?alt=media&token=73319d64-32aa-4995-873a-61182e8cfa13'
+            picture: user.value.picture ?? 'eventMarker.png'
         },
         title: '',
         description: '',
         cta: '',
         location: '',
+        coords: { lat: 0, lng: 0 },
         // categories: [],
         images: [
             { image: null, imageURL: null },
@@ -150,6 +156,28 @@
     const deleteImage = (i: number) => {
         formData.value.images[i-1].image = null
         formData.value.images[i-1].imageURL = null
+    }
+
+
+    let getLocationsTimeout: NodeJS.Timeout
+    const getLocations = async () => {
+        clearTimeout(getLocationsTimeout)
+        getLocationsTimeout = setTimeout( async () => {
+            fetch(`https://api.locationiq.com/v1/autocomplete?q=${formData.value.location}&key=pk.5608fb9f359474030ec3642cb19b1588`, {method: 'GET', headers: {accept: 'application/json'}})
+            .then(res => res.json())
+            .then(data => {
+                locationsResult.value = data
+            })
+            .catch(err => console.error(err))
+
+        }, 1000)
+    }
+
+    const selectLocationOption = (option: any) => {
+        formData.value.location = option.display_name
+        formData.value.coords.lat = option.lat
+        formData.value.coords.lng = option.lon
+        locationsResult.value = []
     }
 
     const createImagesFormData = (): FormData => {
@@ -228,6 +256,29 @@
             align-items: center;
             justify-content: space-between;
             width: 100%;
+        }
+
+        .location-autocomplete-options {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 4px 0 16px 0;
+
+            &:empty {
+                display: none;
+            }
+
+            div {
+                border: 1px solid $color-grey;
+                border-radius: 8px;
+                padding: 8px 12px;
+                transition: all 300ms ease;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #fff;
+                }
+            }
         }
     }
 </style>

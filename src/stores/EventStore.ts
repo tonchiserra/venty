@@ -12,16 +12,29 @@ class EventStore {
     }
 
     async getLastEvents(): Promise<void> {
-        try {            
-            let response = await fetch(config.APP.EVENT_ENDPOINT)
-            if(!response.ok) throw new Error(response.statusText)
-
-            let events = await response.json()
-            this.state.events = events.data
-
-        }catch(error) {
-            console.error(error)
+        const getEvents = async (pos: GeolocationPosition) => {
+            console.log(pos.coords)
+            try {            
+                let response = await fetch(`${config.APP.EVENT_ENDPOINT}?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}`)
+                if(!response.ok) throw new Error(response.statusText)
+    
+                let events = await response.json()
+                this.state.events = events.data
+    
+                console.log(this.state.events)
+    
+            }catch(error) {
+                console.error(error)
+            }
         }
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                getEvents.bind(this),
+                (error) => console.error(error),
+                { timeout: 5000 }
+            )
+        } 
     }
 
     async getEventById(id: string): Promise<void> {

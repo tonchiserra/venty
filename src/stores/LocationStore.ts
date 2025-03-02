@@ -8,18 +8,18 @@ class LocationStore {
         this.userMarker = L.icon({
             iconUrl: 'userMarker.png',
             shadowUrl: '',
-            iconSize: [20, 20],
+            iconSize: [30, 30],
             shadowSize: [0, 0],
-            iconAnchor: [10, 10],
+            iconAnchor: [15, 15],
             shadowAnchor: [0, 0],
-            popupAnchor: [10, 0]
+            popupAnchor: [15, 0]
         })
     }
 
     initMap() {
         this.map = L.map('map').setView([-31, -61], 7)
 
-        L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png', {
+        L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=c63a5ed8-af22-4a49-967b-93dc5436f08b', {
             //options
         }).addTo(this.map)
     
@@ -41,20 +41,19 @@ class LocationStore {
 
     setEventsPositions(events: any) {
         events.forEach((event: any) => {
-            if(!!this.map && !!event.coords && !!event.coords[0] && !!event.coords[1]) {
+            if(!!this.map && !!event.coords && !!event.coords.lat && !!event.coords.lng) {
                 let icon = L.icon({
                     iconUrl: event.owner?.picture ?? 'eventMarker.png',
                     shadowUrl: '',
-                    iconSize: [30, 30],
+                    iconSize: [40, 40],
                     shadowSize: [0, 0],
-                    iconAnchor: [15, 15],
+                    iconAnchor: [20, 20],
                     shadowAnchor: [0, 0],
-                    popupAnchor: [0, -15]
+                    popupAnchor: [0, -20]
                 })
 
-                let marker = L.marker([event.coords[0], event.coords[1]], { icon }).addTo(this.map)
+                let marker = L.marker([event.coords.lat, event.coords.lng], { icon }).addTo(this.map)
                 
-                console.log(event)
                 marker.bindPopup(this.createEventPopup(event))
             }
         })

@@ -10,11 +10,22 @@
     onMounted(() => {
         locationStore.initMap()
         locationStore.setEventsPositions(eventStore.state.events)
+        setAnimationDelay()
     })
 
     watch(() => eventStore.state.events, () => {
         locationStore.setEventsPositions(eventStore.state.events)
+        setAnimationDelay()
     })
+
+    const setAnimationDelay = () => {
+        let allMapMarkers = [...document.querySelectorAll<HTMLElement>('.leaflet-marker-icon')]
+        if(!!!allMapMarkers.length) return
+
+        allMapMarkers.forEach((marker: HTMLElement) => {
+            marker.style.animationDelay = `${Math.random() * 2}s`
+        })
+    }
 </script>
 
 <style lang="scss">
@@ -24,23 +35,37 @@
 
         .leaflet-marker-icon {
             border-radius: 100px;
-            border: 2px solid $color-primary;
+
+            &:not([src="userMarker.png"]) {
+                outline: 2px solid $color-primary;
+                outline-offset: 0px;
+                animation: pulse 2s infinite;
+                border: 2px solid #fff;
+            }
 
             &[src="userMarker.png"] {
-                animation: pulse 3s infinite;
+                border: 6px solid #A3C19E99;
             }
+        }
+
+        .leaflet-control-attribution {
+            display: none;
         }
     }
 
     @keyframes pulse {
         0% {
-            border-color: lighten($color-primary, 0%);
+            outline-offset: 0px;
+            -moz-outline-radius: 100px;
+            outline-color: $color-primary;
         }
         50% {
-            border-color: lighten($color-primary, 70%);
+            outline-offset: 3px;
+            outline-color: $color-primary;
         }
         100% {
-            border-color: $color-primary;
+            outline-offset: 7px;
+            outline-color: transparent;
         }
     }
 </style>
